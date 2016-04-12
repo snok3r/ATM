@@ -1,7 +1,5 @@
 package main;
 
-import main.util.Serialize;
-
 import static org.junit.Assert.*;
 
 public class ATMTest {
@@ -20,8 +18,6 @@ public class ATMTest {
         atm.put(Nominal.FIVE_HUNDRED, 1);
         atm.put(Nominal.THOUSAND, 1);
         atm.put(Nominal.THOUSAND, 1);
-
-        //Serialize.serializeUsers("atms.dat", Arrays.asList(atm));
     }
 
     @org.junit.Test
