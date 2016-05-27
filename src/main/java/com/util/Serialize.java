@@ -1,4 +1,4 @@
-package main.util;
+package com.util;
 
 import java.io.*;
 import java.util.Collection;

@@ -1,7 +1,4 @@
-package main;
-
-import com.sun.istack.internal.NotNull;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+package com.atm;
 
 import java.io.Serializable;
 import java.util.*;
@@ -30,11 +27,8 @@ public class ATM implements IATM, Serializable {
     }
 
     @Override
-    @NotNull
-    public List<String> get(int amount) {
-        //List<String> returnList = new ArrayList<>(Nominal.values().length);
-        //return returnList;
-        throw new NotImplementedException();
+    public Map<Nominal, Integer> get(int amount) {
+        return null;
     }
 
     @Override

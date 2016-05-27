@@ -1,4 +1,4 @@
-package main;
+package com.atm;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 interface IATM {
     int put(Nominal n, int count) throws IllegalArgumentException;
 
-    List<String> get(int amount);
+    Map<Nominal, Integer> get(int amount);
 
     Map<Nominal, Integer> dump();
 

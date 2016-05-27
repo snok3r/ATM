@@ -1,4 +1,4 @@
-package main;
+package com.atm;
 
 import static org.junit.Assert.*;
 
