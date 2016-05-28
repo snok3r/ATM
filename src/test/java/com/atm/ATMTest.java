@@ -18,17 +18,12 @@ public class ATMTest {
         atm.put(Nominal.FIVE_HUNDRED, 1);
         atm.put(Nominal.THOUSAND, 1);
         atm.put(Nominal.THOUSAND, 1);
-    }
-
-    @org.junit.Test
-    public void put() throws Exception {
-        try {
-            atm.put(Nominal.FIFTY, -1);
-            System.out.println("Trying put negative amount of Nominal: FAIL (exception not caught)");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Trying put negative amount of Nominal: OK (exception caught)");
-        }
 
         assertEquals(atm.state(), 3166);
+    }
+
+    @org.junit.Test(expected = IllegalArgumentException.class)
+    public void putNegative() throws Exception {
+        atm.put(Nominal.FIFTY, -1);
     }
 }

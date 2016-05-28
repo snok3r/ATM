@@ -10,7 +10,8 @@ public class ATM implements IATM, Serializable {
 
     public ATM() {
         money = new HashMap<>(Nominal.values().length);
-        Arrays.stream(Nominal.values()).forEach(n -> money.put(n, 0));
+        for (Nominal n : Nominal.values())
+            money.put(n, 0);
         totalAmount = 0;
     }
 
@@ -43,6 +44,7 @@ public class ATM implements IATM, Serializable {
 
     @Override
     public int quit() {
+        money = null;
         System.out.println("Bye!");
         return 0;
     }
