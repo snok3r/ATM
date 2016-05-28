@@ -10,6 +10,7 @@
     <!-- For developers -->
     <name>ATM-application</name>
     <description>Cash machine realization</description>
+    <url>https://github.com/snok3r/ATM</url>
 
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
