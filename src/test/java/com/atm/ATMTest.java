@@ -2,19 +2,25 @@ package com.atm;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
 public class ATMTest {
+
     private IATM atm;
-    private ApplicationContext context = new ClassPathXmlApplicationContext("spring-context-test.xml");
 
     @Before
     public void setUp() throws Exception {
 
-        atm = context.getBean("testATM", IATM.class);
+        Map<Nominal, Integer> money = new HashMap<>();
+        for (Nominal n : Nominal.values())
+            money.put(n, 1);
+
+        atm = new ATM(money);
+
         assertEquals(atm.state(), 1666);
     }
 

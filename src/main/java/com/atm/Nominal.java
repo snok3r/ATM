@@ -9,13 +9,13 @@ public enum Nominal {
     FIVE_HUNDRED(500),
     THOUSAND(1000);
 
-    private final int amount;
+    private final int value;
 
-    Nominal(int amount) {
-        this.amount = amount;
+    Nominal(int value) {
+        this.value = value;
     }
 
     public int getValue() {
-        return amount;
+        return value;
     }
 }
