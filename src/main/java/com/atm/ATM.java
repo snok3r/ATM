@@ -1,34 +1,32 @@
 package com.atm;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class ATM implements IATM, Serializable {
+public class ATM implements IATM {
 
-    private Map<Nominal, Integer> money;
+    private final Map<Nominal, Integer> money;
     private int totalAmount;
 
-    public ATM() {
-        money = new HashMap<>(Nominal.values().length);
-        for (Nominal n : Nominal.values())
-            money.put(n, 0);
-        totalAmount = 0;
+    public ATM(Map<Nominal, Integer> money) {
+        this.money = money;
+
+        this.totalAmount = recountMoney();
     }
 
     @Override
     public int put(Nominal n, int count) throws IllegalArgumentException {
-        if (count < 0)
+        if (count <= 0)
             throw new IllegalArgumentException("Count must be greater than 0");
-
-        totalAmount += nominalToInt(n) * count;
 
         money.put(n, money.get(n) + count);
 
-        return totalAmount;
+        return totalAmount = recountMoney();
     }
 
     @Override
     public Map<Nominal, Integer> get(int amount) {
+
+        totalAmount = recountMoney();
         return null;
     }
 
@@ -42,31 +40,23 @@ public class ATM implements IATM, Serializable {
         return totalAmount;
     }
 
-    @Override
-    public int quit() {
-        money = null;
-        System.out.println("Bye!");
-        return 0;
+    private int recountMoney() {
+        int totalAmount = 0;
+
+        for (Map.Entry e : money.entrySet()) {
+            int amount = ((Nominal) e.getKey()).getValue();
+            int count = (int) e.getValue();
+
+            totalAmount += amount * count;
+        }
+
+        return totalAmount;
     }
 
-    private int nominalToInt(Nominal n) {
-        switch (n) {
-            case ONE:
-                return 1;
-            case FIVE:
-                return 5;
-            case TEN:
-                return 10;
-            case FIFTY:
-                return 50;
-            case HUNDRED:
-                return 100;
-            case FIVE_HUNDRED:
-                return 500;
-            case THOUSAND:
-                return 1000;
-            default:
-                return 0;
-        }
+    @Override
+    public int quit() {
+        money.clear();
+        System.out.println("Bye!");
+        return 0;
     }
 }

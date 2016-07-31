@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.atm</groupId>
@@ -13,23 +13,24 @@
     <url>https://github.com/snok3r/ATM</url>
 
     <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.java.version>1.7</project.java.version>
     </properties>
 
     <dependencies>
-    <!-- JUnit testing -->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.1.RELEASE</version>
+        </dependency>
+
+        <!-- JUnit testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
         </dependency>
 
         <!-- For jar executability -->
@@ -52,8 +53,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${project.java.version}</source>
+                    <target>${project.java.version}</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -66,7 +67,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.atm.Main</mainClass>
+                            <mainClass>com.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -78,7 +79,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>com.atm.Main</mainClass>
+                    <mainClass>com.Main</mainClass>
                     <includePluginDependencies>false</includePluginDependencies>
                 </configuration>
             </plugin>

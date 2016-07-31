@@ -1,29 +1,42 @@
 package com.atm;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import static org.junit.Assert.*;
 
 public class ATMTest {
-    private ATM atm;
+    private IATM atm;
+    private ApplicationContext context = new ClassPathXmlApplicationContext("spring-context-test.xml");
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
-        atm = new ATM();
 
-        atm.put(Nominal.ONE, 1);
-        atm.put(Nominal.FIVE, 1);
-        atm.put(Nominal.TEN, 1);
-        atm.put(Nominal.FIFTY, 1);
-        atm.put(Nominal.HUNDRED, 1);
-        atm.put(Nominal.FIVE_HUNDRED, 1);
-        atm.put(Nominal.FIVE_HUNDRED, 1);
-        atm.put(Nominal.THOUSAND, 1);
-        atm.put(Nominal.THOUSAND, 1);
-
-        assertEquals(atm.state(), 3166);
+        atm = context.getBean("testATM", IATM.class);
+        assertEquals(atm.state(), 1666);
     }
 
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void putNegative() throws Exception {
-        atm.put(Nominal.FIFTY, -1);
+    @Test(expected = IllegalArgumentException.class)
+    public void put_negative_amount() throws Exception {
+        int stateBefore = atm.state();
+
+        try {
+            atm.put(Nominal.FIFTY, -1);
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } finally {
+            assertEquals(stateBefore, atm.state());
+        }
+    }
+
+    @Test
+    public void put_1000_by_500() throws Exception {
+        int stateBefore = atm.state();
+
+        atm.put(Nominal.FIVE_HUNDRED, 2);
+
+        assertEquals(atm.state(), stateBefore += 1000);
     }
 }

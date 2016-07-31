@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="true"
+>
+
+    <bean id="myATM" class="com.atm.ATM"
+          destroy-method="quit">
+        <constructor-arg name="money" ref="empty-nominal-linked-map"/>
+    </bean>
+
+    <util:map id="empty-nominal-linked-map" map-class="java.util.LinkedHashMap">
+        <entry key="ONE" value="0"/>
+        <entry key="FIVE" value="0"/>
+        <entry key="TEN" value="0"/>
+        <entry key="FIFTY" value="0"/>
+        <entry key="HUNDRED" value="0"/>
+        <entry key="FIVE_HUNDRED" value="0"/>
+        <entry key="THOUSAND" value="0"/>
+    </util:map>
+
+</beans>
